@@ -1,0 +1,170 @@
+/* Task 1: Basic Page Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #2b2b2b;
+    color: #f4f4f4;
+}
+
+/* Task 2: Header & Footer */
+header {
+    background: #1f1f1f;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    border-bottom: 3px solid #ff6600;
+}
+
+header h1 {
+    margin: 0;
+    color: #ff6600;
+}
+
+footer {
+    text-align: center;
+    background: #1f1f1f;
+    color: white;
+    padding: 15px;
+    margin-top: 30px;
+    border-top: 3px solid #ff6600;
+}
+
+/* Task 3: Horizontal Navigation Bar */
+nav {
+    background: #141414;
+    text-align: center;
+    padding: 12px;
+}
+
+nav button {
+    background: none;
+    border: 0;
+    color: white;
+    margin: 5px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav button:hover {
+    color: #ff6600;
+}
+
+/* Task 4: Card Styling & Box Model */
+section {
+    display: none;
+    width: 85%;
+    max-width: 1000px;
+    margin: 25px auto;
+    background: #3a3a3a;
+    padding: 28px;
+    border-radius: 8px;
+    border: 1px solid #ff6600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+section.active {
+    display: block;
+}
+
+.cards {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    min-width: 200px;
+    background: #2b2b2b;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #ff6600;
+}
+
+/* Task 5: Style Lists */
+ol.stock-list {
+    padding-left: 20px;
+}
+
+ol.stock-list li {
+    margin-bottom: 10px;
+    color: #ff8533;
+    font-weight: bold;
+}
+
+dl.item-description {
+    background: #222;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+dl.item-description dt {
+    color: #ff6600;
+    font-weight: bold;
+}
+
+dl.item-description dd {
+    margin-left: 0;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+/* Tables & Forms */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #555;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #1f1f1f;
+    color: #ff6600;
+}
+
+form {
+    max-width: 600px;
+    margin: auto;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+    color: #ff8533;
+}
+
+input, select {
+    width: 100%;
+    padding: 9px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    background: #222;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+.submit {
+    margin-top: 18px;
+    padding: 10px 22px;
+    background: #ff6600;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.submit:hover {
+    background: #e65c00;
+}
