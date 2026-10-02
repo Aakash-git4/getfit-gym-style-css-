@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetFIT Gym - Interactive Portal</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-orange: #ff6600;
+            --brand-orange-hover: #e65c00;
+            --dark-bg: #1f1f1f;
+            --card-bg: #2b2b2b;
+            --border-color: #3a3a3a;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-brand {
+            color: var(--brand-orange) !important;
+        }
+
+        .bg-brand {
+            background-color: var(--brand-orange) !important;
+        }
+
+        .btn-brand {
+            background-color: var(--brand-orange);
+            color: #ffffff;
+            border: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-brand:hover,
+        .btn-brand:focus {
+            background-color: var(--brand-orange-hover);
+            color: #ffffff;
+        }
+
+        .btn-outline-brand {
+            border: 1px solid var(--brand-orange);
+            color: var(--brand-orange);
+            font-weight: bold;
+        }
+
+        .btn-outline-brand:hover {
+            background-color: var(--brand-orange);
+            color: #ffffff;
+        }
+
+        .navbar {
+            background-color: #141414 !important;
+            border-bottom: 3px solid var(--brand-orange);
+        }
+
+        .card-custom {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--brand-orange);
+            color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .section-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--brand-orange);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+        }
+
+        .log-box {
+            background: #111111;
+            color: #00ff66;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 60px;
+            white-space: pre-line;
+            border: 1px solid #333;
+        }
+
+        .form-control,
+        .form-select {
+            background-color: #222222 !important;
+            color: #ffffff !important;
+            border: 1px solid #555555 !important;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--brand-orange) !important;
+            box-shadow: 0 0 0 0.25rem rgba(255, 102, 0, 0.25) !important;
+        }
+
+        .page-link {
+            background-color: var(--card-bg);
+            color: var(--brand-orange);
+            border-color: #444;
+            cursor: pointer;
+        }
+
+        .page-item.active .page-link {
+            background-color: var(--brand-orange);
+            border-color: var(--brand-orange);
+            color: #ffffff;
+        }
+
+        .page-item.disabled .page-link {
+            background-color: #141414;
+            color: #6c757d;
+            border-color: #333;
+            cursor: not-allowed;
+        }
+
+        footer {
+            background-color: #141414;
+            border-top: 3px solid var(--brand-orange);
+            margin-top: auto;
+        }
+
+        .error-msg {
+            color: #ff4d4d;
+            font-size: 0.875rem;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .nav-link {
+            cursor: pointer;
+        }
+
+        .page-section {
+            min-height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER & NAVIGATION ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container-fluid px-4">
+
+        <a class="navbar-brand text-brand fw-bold fs-3"
+           style="cursor:pointer;"
+           onclick="showSection('home')">
+
+            <i class="bi bi-lightning-charge-fill me-1"></i>
+            GetFIT Gym
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#gymNavbar">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="gymNavbar">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white"
+                       href="javascript:void(0)"
+                       onclick="showSection('home')">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white"
+                       href="javascript:void(0)"
+                       onclick="showSection('tasks13')">
+                        Billing & Tools
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white"
+                       href="javascript:void(0)"
+                       onclick="showSection('registration')">
+                        Registration
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white"
+                       href="javascript:void(0)"
+                       onclick="showSection('async-workflows')">
+                        Workflows & Services
+                    </a>
+                </li>
+
+            </ul>
+
+            <form class="d-flex" onsubmit="event.preventDefault();">
+
+                <div class="input-group">
+
+                    <span class="input-group-text bg-warning text-dark border-warning">
+                        <i class="bi bi-search"></i>
+                    </span>
+
+                    <input class="form-control"
+                           type="search"
+                           placeholder="Search Portal..."
+                           aria-label="Search">
+
+                    <button class="btn btn-warning fw-bold"
+                            type="submit">
+                        Search
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- ================= MAIN CONTAINER ================= -->
+
+<div class="container my-4">
+
+    <!-- Alert -->
+    <div class="alert alert-warning alert-dismissible fade show text-dark fw-bold shadow-sm"
+         role="alert">
+
+        <i class="bi bi-bell-fill me-2"></i>
+
+        <strong>Special Offer!</strong>
+        Get 10% off when total gym services exceed ₹2,000!
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- PAGE 1 : HOME -->
+    <!-- ================================================= -->
+
+    <div id="home" class="page-section">
+
+        <div class="row align-items-center section-box p-4 mb-4">
+
+            <div class="col-md-3 text-center mb-3 mb-md-0">
+
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300"
+                     class="rounded-circle img-fluid border border-3 border-warning"
+                     style="width:150px;height:150px;object-fit:cover;"
+                     alt="Gym">
+
+            </div>
+
+            <div class="col-md-9">
+
+                <h1 class="display-6 text-brand fw-bold">
+                    Welcome to GetFIT Gym Portal
+                </h1>
+
+                <p class="lead">
+                    Transform your body and mind with elite training programs,
+                    automated membership calculations, and seamless interactive services.
+                </p>
+
+                <button class="btn btn-brand btn-lg"
+                        onclick="showSection('registration')">
+
+                    <i class="bi bi-person-plus-fill me-1"></i>
+                    Register Today
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <h3 class="text-brand mb-3 fw-bold">
+            Gym Membership Plans
+        </h3>
+
+        <div class="row g-4 mb-4">
+
+            <!-- Basic -->
+            <div class="col-md-4">
+
+                <div class="card card-custom h-100 p-3">
+
+                    <h4 class="text-brand">
+                        Basic Plan
+                    </h4>
+
+                    <p>
+                        Access to gym floor & cardio machines.
+                    </p>
+
+                    <h3 class="my-2">
+                        ₹1,200
+                        <small class="fs-6 text-muted">
+                            /month
+                        </small>
+                    </h3>
+
+                    <button class="btn btn-outline-brand mt-auto"
+                            onclick="showSection('registration')">
+
+                        Select Basic
+
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- Pro -->
+            <div class="col-md-4">
+
+                <div class="card card-custom h-100 p-3 border-warning">
+
+                    <span class="badge bg-warning text-dark float-end mb-2">
+                        Most Popular
+                    </span>
+
+                    <h4 class="text-brand">
+                        Pro Fitness
+                    </h4>
+
+                    <p>
+                        Full gym access + group classes & trainer guidance.
+                    </p>
+
+                    <h3 class="my-2">
+                        ₹2,000
+                        <small class="fs-6 text-muted">
+                            /month
+                        </small>
+                    </h3>
+
+                    <button class="btn btn-brand mt-auto"
+                            onclick="showSection('registration')">
+
+                        Select Pro
+
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- Elite -->
+            <div class="col-md-4">
+
+                <div class="card card-custom h-100 p-3">
+
+                    <h4 class="text-brand">
+                        Elite Annual
+                    </h4>
+
+                    <p>
+                        Unlimited access + free personal trainer sessions.
+                    </p>
+
+                    <h3 class="my-2">
+                        ₹11,000
+                        <small class="fs-6 text-muted">
+                            /year
+                        </small>
+                    </h3>
+
+                    <button class="btn btn-outline-brand mt-auto"
+                            onclick="showSection('registration')">
+
+                        Select Elite
+
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- PAGE 2 : BILLING & TOOLS -->
+    <!-- ================================================= -->
+
+    <div id="tasks13" class="page-section d-none">
+
+        <!-- Task 1 -->
+        <div class="section-box">
+
+            <h3 class="text-brand mb-3">
+                <i class="bi bi-calculator-fill me-2"></i>
+                 Automated Bill Calculator
+            </h3>
+
+            <p>
+                Calculates total bill from selected service prices
+                [500, 1200, 800] and applies 10% discount if total exceeds ₹2,000.
+            </p>
+
+            <button class="btn btn-brand"
+                    onclick="calculateTotalBill()">
+
+                Calculate Total Bill
+
+            </button>
+
+            <div id="task1-output"
+                 class="log-box mt-3">
+
+                Click button to run calculation...
+
+            </div>
+
+        </div>
+
+
+      
+       
+        <div class="section-box">
+
+            <h3 class="text-brand mb-3">
+
+                <i class="bi bi-type me-2"></i>
+
+                Dynamic Live Character Counter
+
+            </h3>
+
+            <label class="form-label text-brand fw-bold">
+                Feedback / Fitness Goal Notes:
+            </label>
+
+            <input type="text"
+                   id="userInput"
+                   class="form-control"
+                   oninput="updateCharCount()"
+                   placeholder="Type your query or feedback here...">
+
+            <p class="mt-2 fw-bold">
+
+                Character Count:
+                <span id="charCount"
+                      class="text-brand fs-5">
+                    0
+                </span>
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- PAGE 3 : REGISTRATION -->
+    <!-- ================================================= -->
+
+    <div id="registration" class="page-section d-none">
+
+        <div class="section-box mx-auto"
+             style="max-width:700px;">
+
+            <h3 class="text-brand text-center mb-4">
+
+                <i class="bi bi-person-lines-fill me-2"></i>
+
+                Member Registration Form
+
+            </h3>
+
+
+            <form id="gymRegForm"
+                  onsubmit="validateGymForm(event)"
+                  novalidate>
+
+
+                <!-- Name -->
+                <div class="mb-3">
+
+                    <label class="form-label text-brand fw-bold">
+                        Full Name
+                    </label>
+
+                    <input type="text"
+                           id="regName"
+                           class="form-control"
+                           placeholder="John Doe">
+
+                    <span id="nameErr"
+                          class="error-msg">
+                    </span>
+
+                </div>
+
+
+                <!-- Mobile -->
+                <div class="mb-3">
+
+                    <label class="form-label text-brand fw-bold">
+                        Mobile Number
+                    </label>
+
+                    <input type="tel"
+                           id="regMobile"
+                           class="form-control"
+                           placeholder="10-digit mobile number">
+
+                    <span id="mobileErr"
+                          class="error-msg">
+                    </span>
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="mb-3">
+
+                    <label class="form-label text-brand fw-bold">
+                        Email Address
+                    </label>
+
+                    <input type="email"
+                           id="regEmail"
+                           class="form-control"
+                           placeholder="name@example.com">
+
+                    <span id="emailErr"
+                          class="error-msg">
+                    </span>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label text-brand fw-bold">
+                            Password
+                        </label>
+
+                        <input type="password"
+                               id="regPass"
+                               class="form-control"
+                               placeholder="Min 6 characters">
+
+                        <span id="passErr"
+                              class="error-msg">
+                        </span>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label text-brand fw-bold">
+                            Confirm Password
+                        </label>
+
+                        <input type="password"
+                               id="regConfirmPass"
+                               class="form-control"
+                               placeholder="Re-enter password">
+
+                        <span id="cpassErr"
+                              class="error-msg">
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Gender -->
+                <div class="mb-3">
+
+                    <label class="form-label text-brand fw-bold">
+                        Gender
+                    </label>
+
+                    <select id="regGender"
+                            class="form-select">
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                    <span id="genderErr"
+                          class="error-msg">
+                    </span>
+
+                </div>
+
+
+                <button type="submit"
+                        class="btn btn-brand w-100 py-2 fs-5">
+
+                    <i class="bi bi-check-circle-fill me-1"></i>
+
+                    Register Member
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- PAGE 4 : ASYNC WORKFLOWS -->
+    <!-- ================================================= -->
+
+    <div id="async-workflows" class="page-section d-none">
+
+
+        <!-- Task 5 -->
+        <div class="section-box">
+
+            <h3 class="text-brand mb-3">
+
+                <i class="bi bi-cup-hot-fill me-2"></i>
+
+                 Food Order Simulation
+                (Nested Callbacks)
+
+            </h3>
+
+            <p>
+                Simulates:
+                Select Food → Confirm Order → Prepare Food →
+                Assign Delivery Partner → Deliver Food
+            </p>
+
+            <button class="btn btn-brand"
+                    onclick="runTask5Callbacks()">
+
+                Start Food Order
+
+            </button>
+
+            <div id="task5-log"
+                 class="log-box mt-3">
+
+                Awaiting order execution...
+
+            </div>
+
+        </div>
+
+
+        <!-- Task 6 -->
+        <div class="section-box">
+
+            <h3 class="text-brand mb-3">
+
+                <i class="bi bi-bag-check-fill me-2"></i>
+
+                Product Purchase Pipeline
+                (Promise Chaining)
+
+            </h3>
+
+            <p>
+                Simulates:
+                Select Product → Check Availability → Add to Cart →
+                Make Payment → Generate Order Confirmation
+            </p>
+
+            <button class="btn btn-brand"
+                    onclick="runTask6Promises()">
+
+                Purchase Gym Gear
+
+            </button>
+
+            <div id="task6-log"
+                 class="log-box mt-3">
+
+                Awaiting product purchase pipeline...
+
+            </div>
+
+        </div>
+
+
+        <!-- Task 7 -->
+        <div class="section-box">
+
+            <h3 class="text-brand mb-3">
+
+                <i class="bi bi-ticket-perforated-fill me-2"></i>
+
+                Cinema Ticket Booking
+                (Async/Await & Try...Catch)
+
+            </h3>
+
+            <p>
+                Simulates:
+                Select Movie → Check Seat Availability →
+                Reserve Seat → Make Payment → Generate Ticket
+            </p>
+
+            <button class="btn btn-brand"
+                    onclick="runTask7Async()">
+
+                Book Movie Ticket
+
+            </button>
+
+            <div id="task7-log"
+                 class="log-box mt-3">
+
+                Awaiting ticket reservation...
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- PAGINATION -->
+    <!-- ================================================= -->
+
+    <nav aria-label="Portal section navigation"
+         class="mt-4 d-flex justify-content-center">
+
+        <ul class="pagination">
+
+
+            <!-- Previous -->
+            <li class="page-item disabled"
+                id="prev-page-btn">
+
+                <span class="page-link"
+                      onclick="navigatePagination(-1)">
+
+                    Previous
+
+                </span>
+
+            </li>
+
+
+            <!-- Page 1 -->
+            <li class="page-item page-num active"
+                id="p-link-1">
+
+                <span class="page-link"
+                      onclick="showSection('home')">
+
+                    1
+
+                </span>
+
+            </li>
+
+
+            <!-- Page 2 -->
+            <li class="page-item page-num"
+                id="p-link-2">
+
+                <span class="page-link"
+                      onclick="showSection('tasks13')">
+
+                    2
+
+                </span>
+
+            </li>
+
+
+            <!-- Page 3 -->
+            <li class="page-item page-num"
+                id="p-link-3">
+
+                <span class="page-link"
+                      onclick="showSection('registration')">
+
+                    3
+
+                </span>
+
+            </li>
+
+
+            <!-- Page 4 -->
+            <li class="page-item page-num"
+                id="p-link-4">
+
+                <span class="page-link"
+                      onclick="showSection('async-workflows')">
+
+                    4
+
+                </span>
+
+            </li>
+
+
+            <!-- Next -->
+            <li class="page-item"
+                id="next-page-btn">
+
+                <span class="page-link"
+                      onclick="navigatePagination(1)">
+
+                    Next
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="py-3 text-center text-secondary">
+
+    <div class="container">
+
+        <p class="mb-0">
+            &copy; 2026 GetFIT Gym Portal.
+            All Rights Reserved.
+            Built with Bootstrap 5 & JavaScript.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+    /* ================================================
+       PAGE NAVIGATION
+       ================================================ */
+
+    const sectionsList = [
+        "home",
+        "tasks13",
+        "registration",
+        "async-workflows"
+    ];
+
+    let currentSectionIdx = 0;
+
+
+    function showSection(sectionId) {
+
+        const index = sectionsList.indexOf(sectionId);
+
+        if (index === -1) {
+            console.error("Section not found:", sectionId);
+            return;
+        }
+
+        currentSectionIdx = index;
+
+
+        /* Hide all sections */
+
+        document.querySelectorAll(".page-section").forEach(function(section) {
+
+            section.classList.add("d-none");
+
+        });
+
+
+        /* Show selected section */
+
+        const targetSection = document.getElementById(sectionId);
+
+        if (targetSection) {
+
+            targetSection.classList.remove("d-none");
+
+        }
+
+
+        /* Update page numbers */
+
+        sectionsList.forEach(function(id, index) {
+
+            const pageItem =
+                document.getElementById("p-link-" + (index + 1));
+
+            if (pageItem) {
+
+                if (index === currentSectionIdx) {
+
+                    pageItem.classList.add("active");
+
+                } else {
+
+                    pageItem.classList.remove("active");
+
+                }
+
+            }
+
+        });
+
+
+        /* Previous button */
+
+        const prevBtn =
+            document.getElementById("prev-page-btn");
+
+
+        if (currentSectionIdx === 0) {
+
+            prevBtn.classList.add("disabled");
+
+        } else {
+
+            prevBtn.classList.remove("disabled");
+
+        }
+
+
+        /* Next button */
+
+        const nextBtn =
+            document.getElementById("next-page-btn");
+
+
+        if (currentSectionIdx === sectionsList.length - 1) {
+
+            nextBtn.classList.add("disabled");
+
+        } else {
+
+            nextBtn.classList.remove("disabled");
+
+        }
+
+
+        /* Scroll to top */
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* Previous / Next */
+
+    function navigatePagination(direction) {
+
+        const newIndex =
+            currentSectionIdx + direction;
+
+
+        if (
+            newIndex >= 0 &&
+            newIndex < sectionsList.length
+        ) {
+
+            showSection(sectionsList[newIndex]);
+
+        }
+
+    }
+
+
+    /* Start on Home */
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+        showSection("home");
+
+    });
+
+
+    /* ================================================
+       TASK 1
+       BILL CALCULATOR
+       ================================================ */
+
+    function calculateTotalBill() {
+
+        const itemPrices = [500, 1200, 800];
+
+        const total =
+            itemPrices.reduce(function(sum, value) {
+
+                return sum + value;
+
+            }, 0);
+
+
+        let finalBill = total;
+
+        let note =
+            "No discount applied.";
+
+
+        if (total > 2000) {
+
+            const discount = total * 0.10;
+
+            finalBill =
+                total - discount;
+
+            note =
+                "Discount Applied (10%): -₹" +
+                discount;
+
+        }
+
+
+        document.getElementById("task1-output").innerText =
+
+            "Item Prices: ₹500, ₹1200, ₹800\n" +
+
+            "Original Total: ₹" +
+            total + "\n" +
+
+            note + "\n" +
+
+            "Final Amount Payable: ₹" +
+            finalBill;
+
+    }
+
+
+    /* ================================================
+       TASK 2
+       THIS KEYWORD
+       ================================================ */
+
+    function changeButtonText(button) {
+
+        button.innerText =
+            "Action Completed!";
+
+        button.classList.remove(
+            "btn-brand",
+            "btn-outline-brand",
+            "btn-secondary"
+        );
+
+        button.classList.add(
+            "btn-success"
+        );
+
+    }
+
+
+    /* ================================================
+       TASK 3
+       CHARACTER COUNTER
+       ================================================ */
+
+    function updateCharCount() {
+
+        const input =
+            document.getElementById("userInput");
+
+        const counter =
+            document.getElementById("charCount");
+
+
+        counter.innerText =
+            input.value.length;
+
+    }
+
+
+    /* ================================================
+       TASK 4
+       FORM VALIDATION
+       ================================================ */
+
+    function validateGymForm(event) {
+
+        event.preventDefault();
+
+        let valid = true;
+
+
+        /* Clear old errors */
+
+        document.querySelectorAll(".error-msg")
+            .forEach(function(error) {
+
+                error.innerText = "";
+
+            });
+
+
+        const name =
+            document.getElementById("regName")
+                .value.trim();
+
+        const mobile =
+            document.getElementById("regMobile")
+                .value.trim();
+
+        const email =
+            document.getElementById("regEmail")
+                .value.trim();
+
+        const password =
+            document.getElementById("regPass")
+                .value;
+
+        const confirmPassword =
+            document.getElementById("regConfirmPass")
+                .value;
+
+        const gender =
+            document.getElementById("regGender")
+                .value;
+
+
+        /* Name */
+
+        if (!name) {
+
+            document.getElementById("nameErr")
+                .innerText =
+                "Full name is required.";
+
+            valid = false;
+
+        }
+
+
+        /* Mobile */
+
+        if (!/^\d{10}$/.test(mobile)) {
+
+            document.getElementById("mobileErr")
+                .innerText =
+                "Enter a valid 10-digit mobile number.";
+
+            valid = false;
+
+        }
+
+
+        /* Email */
+
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+
+            document.getElementById("emailErr")
+                .innerText =
+                "Enter a valid email address.";
+
+            valid = false;
+
+        }
+
+
+        /* Password */
+
+        if (password.length < 6) {
+
+            document.getElementById("passErr")
+                .innerText =
+                "Password must be at least 6 characters.";
+
+            valid = false;
+
+        }
+
+
+        /* Confirm Password */
+
+        if (password !== confirmPassword) {
+
+            document.getElementById("cpassErr")
+                .innerText =
+                "Passwords do not match.";
+
+            valid = false;
+
+        }
+
+
+        /* Gender */
+
+        if (!gender) {
+
+            document.getElementById("genderErr")
+                .innerText =
+                "Please select a gender option.";
+
+            valid = false;
+
+        }
+
+
+        /* Success */
+
+        if (valid) {
+
+            alert(
+                "Registration Successful! Welcome to GetFIT Gym."
+            );
+
+            document.getElementById("gymRegForm")
+                .reset();
+
+        }
+
+    }
+
+
+    /* ================================================
+       TASK 5
+       NESTED CALLBACKS
+       ================================================ */
+
+    function runTask5Callbacks() {
+
+        const log =
+            document.getElementById("task5-log");
+
+
+        log.innerText =
+            "Initiating Food Order Workflow...\n";
+
+
+        setTimeout(function() {
+
+            log.innerText +=
+                "1. Select Food: Protein Shake selected.\n";
+
+
+            setTimeout(function() {
+
+                log.innerText +=
+                    "2. Confirm Order: Order Confirmed.\n";
+
+
+                setTimeout(function() {
+
+                    log.innerText +=
+                        "3. Prepare Food: Preparation Complete.\n";
+
+
+                    setTimeout(function() {
+
+                        log.innerText +=
+                            "4. Assign Delivery Partner: Partner Assigned.\n";
+
+
+                        setTimeout(function() {
+
+                            log.innerText +=
+                                "5. Deliver Food: Protein Shake Delivered Successfully!";
+
+                        }, 800);
+
+                    }, 800);
+
+                }, 800);
+
+            }, 800);
+
+        }, 800);
+
+    }
+
+
+    /* ================================================
+       TASK 6
+       PROMISE CHAINING
+       ================================================ */
+
+    function runTask6Promises() {
+
+        const log =
+            document.getElementById("task6-log");
+
+
+        log.innerText =
+            "Initiating Purchase Pipeline...\n";
+
+
+        const selectProduct =
+            function() {
+
+                return new Promise(function(resolve) {
+
+                    setTimeout(function() {
+
+                        resolve(
+                            "1. Select Product: Dumbbells Selected"
+                        );
+
+                    }, 700);
+
+                });
+
+            };
+
+
+        const checkAvailability =
+            function(message) {
+
+                log.innerText +=
+                    message + "\n";
+
+
+                return new Promise(function(resolve) {
+
+                    setTimeout(function() {
+
+                        resolve(
+                            "2. Check Availability: Stock Verified (In Stock)"
+                        );
+
+                    }, 700);
+
+                });
+
+            };
+
+
+        const addToCart =
+            function(message) {
+
+                log.innerText +=
+                    message + "\n";
+
+
+                return new Promise(function(resolve) {
+
+                    setTimeout(function() {
+
+                        resolve(
+                            "3. Add to Cart: Item Added to Shopping Cart"
+                        );
+
+                    }, 700);
+
+                });
+
+            };
+
+
+        const makePayment =
+            function(message) {
+
+                log.innerText +=
+                    message + "\n";
+
+
+                return new Promise(function(resolve) {
+
+                    setTimeout(function() {
+
+                        resolve(
+                            "4. Make Payment: Transaction Successful"
+                        );
+
+                    }, 700);
+
+                });
+
+            };
+
+
+        const confirmOrder =
+            function(message) {
+
+                log.innerText +=
+                    message + "\n";
+
+
+                return new Promise(function(resolve) {
+
+                    setTimeout(function() {
+
+                        resolve(
+                            "5. Generate Order Confirmation: Order #GF-8849 Confirmed!"
+                        );
+
+                    }, 700);
+
+                });
+
+            };
+
+
+        selectProduct()
+            .then(checkAvailability)
+            .then(addToCart)
+            .then(makePayment)
+            .then(confirmOrder)
+            .then(function(finalMessage) {
+
+                log.innerText +=
+                    finalMessage;
+
+            });
+
+    }
+
+
+    /* ================================================
+       TASK 7
+       ASYNC / AWAIT
+       ================================================ */
+
+    function delay(milliseconds) {
+
+        return new Promise(function(resolve) {
+
+            setTimeout(resolve, milliseconds);
+
+        });
+
+    }
+
+
+    async function runTask7Async() {
+
+        const log =
+            document.getElementById("task7-log");
+
+
+        log.innerText =
+            "Initiating Cinema Booking Workflow...\n";
+
+
+        try {
+
+            await delay(700);
+
+            log.innerText +=
+                "1. Select Movie: Fitness Documentary\n";
+
+
+            await delay(700);
+
+            log.innerText +=
+                "2. Check Seat Availability: Seats Available\n";
+
+
+            await delay(700);
+
+            log.innerText +=
+                "3. Reserve Seat: Seat A-12 Reserved\n";
+
+
+            await delay(700);
+
+            log.innerText +=
+                "4. Make Payment: Payment Approved\n";
+
+
+            await delay(700);
+
+            log.innerText +=
+                "5. Generate Ticket: Ticket #TKT-9902 Issued Successfully!";
+
+        }
+
+        catch (error) {
+
+            log.innerText +=
+                "Error encountered: " +
+                error.message;
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
