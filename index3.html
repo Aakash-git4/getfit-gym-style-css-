@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetFIT Gym Portal - Bootstrap</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { background-color: #212529; color: #f8f9fa; }
+        .card { background-color: #2c3034; color: #fff; border: 1px solid #ff6600; }
+        .btn-custom { background-color: #ff6600; color: #fff; }
+        .btn-custom:hover { background-color: #e65c00; color: #fff; }
+        .page-link { background-color: #2c3034; color: #ff6600; border-color: #444; }
+        .page-item.active .page-link { background-color: #ff6600; border-color: #ff6600; color: #fff; }
+        .page-item.disabled .page-link { background-color: #1a1d20; color: #6c757d; border-color: #333; }
+    </style>
+</head>
+<body>
+
+    <!-- Task 3: Navbar with Links, Dropdown & Search -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-warning sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-warning fw-bold fs-3" href="#" onclick="goToPage(1)"><i class="bi bi-lightning-charge-fill"></i> GetFIT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="goToPage(1)">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="goToPage(2)">Classes & Plans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="goToPage(3)">Registration</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="plansDropdown" role="button" data-bs-toggle="dropdown">Quick Select</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#" onclick="goToPage(2)">Basic Plan</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="goToPage(2)">Pro Fitness</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="goToPage(2)">VIP Annual Pass</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <span class="input-group-text bg-warning border-warning"><i class="bi bi-search"></i></span>
+                        <input class="form-control" type="search" placeholder="Search Portal..." aria-label="Search">
+                        <button class="btn btn-warning" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Task 1: Responsive Layout & Container Setup -->
+    <div class="container my-4">
+
+        <!-- Task 5: Interactive Dismissible Alert -->
+        <div class="alert alert-warning alert-dismissible fade show text-dark fw-semibold" role="alert">
+            <i class="bi bi-bell-fill me-2"></i><strong>New Offer!</strong> Get 20% off on all annual gym memberships this week.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- ================= PAGE 1: HOME ================= -->
+        <div id="page-1" class="page-section">
+            <!-- Task 4: Circle Image Shaping & Hero Banner -->
+            <div class="row align-items-center bg-dark text-white p-4 rounded-3 border border-secondary mb-4">
+                <div class="col-md-3 text-center mb-3 mb-md-0">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300" class="rounded-circle img-fluid border border-3 border-warning" style="width: 160px; height: 160px; object-fit: cover;" alt="Gym Avatar">
+                </div>
+                <div class="col-md-9">
+                    <h1 class="display-6 text-warning">Transform Your Life at GetFIT</h1>
+                    <p class="lead">State-of-the-art equipment, certified personal trainers, and flexible workout schedules designed to fit your goals.</p>
+                    <button class="btn btn-custom btn-lg" onclick="goToPage(3)"><i class="bi bi-person-plus-fill me-1"></i> Register Now</button>
+                </div>
+            </div>
+
+            <!-- Task 2: Responsive Grid Layout -->
+            <h3 class="text-warning mb-3">Featured Highlights</h3>
+            <div class="row g-4">
+                <div class="col-sm-12 col-md-4">
+                    <div class="card h-100 shadow-sm text-center p-3">
+                        <i class="bi bi-trophy-fill text-warning fs-1"></i>
+                        <h4 class="card-title text-warning mt-2">Certified Trainers</h4>
+                        <p class="card-text">Expert guidance to push your limits safely and effectively.</p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="card h-100 shadow-sm text-center p-3 border-warning">
+                        <i class="bi bi-clock-history text-warning fs-1"></i>
+                        <h4 class="card-title text-warning mt-2">24/7 Floor Access</h4>
+                        <p class="card-text">Work out whenever it suits your daily routine.</p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="card h-100 shadow-sm text-center p-3">
+                        <i class="bi bi-heart-pulse-fill text-warning fs-1"></i>
+                        <h4 class="card-title text-warning mt-2">Modern Cardio Gear</h4>
+                        <p class="card-text">Smart treadmills and rowers equipped with tracking units.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 2: PLANS & CLASSES ================= -->
+        <div id="page-2" class="page-section d-none">
+            <h3 class="text-warning mb-3">Our Membership Plans</h3>
+            <div class="row g-4 mb-4">
+                <div class="col-sm-12 col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h4 class="card-title text-warning">Basic Plan</h4>
+                            <p class="card-text">Access to gym floor & cardio machines during standard hours.</p>
+                            <h2 class="my-3">₹1,200 <small class="fs-6 text-muted">/mo</small></h2>
+                            <button onclick="goToPage(3)" class="btn btn-outline-warning w-100">Select Plan</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="card h-100 shadow-sm border-warning">
+                        <div class="card-body text-center">
+                            <span class="badge bg-warning text-dark float-end">Popular</span>
+                            <h4 class="card-title text-warning">Pro Fitness</h4>
+                            <p class="card-text">Full gym floor access, group classes, and trainer guidance.</p>
+                            <h2 class="my-3">₹2,000 <small class="fs-6 text-muted">/mo</small></h2>
+                            <button onclick="goToPage(3)" class="btn btn-custom w-100">Select Plan</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h4 class="card-title text-warning">Elite Annual</h4>
+                            <p class="card-text">Unlimited 24/7 access, personal trainer, and locker benefits.</p>
+                            <h2 class="my-3">₹11,000 <small class="fs-6 text-muted">/yr</small></h2>
+                            <button onclick="goToPage(3)" class="btn btn-outline-warning w-100">Select Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 3: REGISTRATION ================= -->
+        <div id="page-3" class="page-section d-none">
+            <div class="card p-4 mx-auto" style="max-width: 650px;">
+                <h3 class="text-warning text-center mb-3">Member Registration</h3>
+                <form onsubmit="event.preventDefault(); alert('Registration Submitted Successfully!');">
+                    <div class="mb-3">
+                        <label class="form-label text-warning">Full Name</label>
+                        <input type="text" class="form-control bg-dark text-white border-secondary" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-warning">Email Address</label>
+                        <input type="email" class="form-control bg-dark text-white border-secondary" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-warning">Select Plan</label>
+                        <select class="form-select bg-dark text-white border-secondary">
+                            <option>Basic Plan (₹1,200/mo)</option>
+                            <option selected>Pro Fitness (₹2,000/mo)</option>
+                            <option>Elite Annual (₹11,000/yr)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-custom w-100 fw-bold py-2">Submit Application</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Task 5: Interactive Pagination Navigation -->
+        <nav aria-label="Page navigation" class="mt-5 d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item disabled" id="prev-btn">
+                    <a class="page-link" href="#" onclick="event.preventDefault(); goToPage(currentPage - 1);">Previous</a>
+                </li>
+                <li class="page-item page-number active" id="pnum-1">
+                    <a class="page-link" href="#" onclick="event.preventDefault(); goToPage(1);">1</a>
+                </li>
+                <li class="page-item page-number" id="pnum-2">
+                    <a class="page-link" href="#" onclick="event.preventDefault(); goToPage(2);">2</a>
+                </li>
+                <li class="page-item page-number" id="pnum-3">
+                    <a class="page-link" href="#" onclick="event.preventDefault(); goToPage(3);">3</a>
+                </li>
+                <li class="page-item" id="next-btn">
+                    <a class="page-link" href="#" onclick="event.preventDefault(); goToPage(currentPage + 1);">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <footer class="bg-dark text-center text-secondary py-3 border-top border-secondary mt-auto">
+        <p class="mb-0">&copy; 2026 GetFIT Gym Portal. Built with Bootstrap 5.</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
+
+    <!-- Page Navigation Control Script -->
+    <script>
+        const totalPages = 3;
+        let currentPage = 1;
+
+        function goToPage(pageNumber) {
+            if (pageNumber < 1 || pageNumber > totalPages) return;
+
+            currentPage = pageNumber;
+
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.add('d-none');
+            });
+
+            // Show active section
+            document.getElementById('page-' + currentPage).classList.remove('d-none');
+
+            // Update Pagination state
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.getElementById('pnum-' + i);
+                if (i === currentPage) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            }
+
+            // Handle Previous/Next disabled states
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            if (currentPage === 1) {
+                prevBtn.classList.add('disabled');
+            } else {
+                prevBtn.classList.remove('disabled');
+            }
+
+            if (currentPage === totalPages) {
+                nextBtn.classList.add('disabled');
+            } else {
+                nextBtn.classList.remove('disabled');
+            }
+
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
+
+
+
